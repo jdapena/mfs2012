@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
+from traktor import config
+import gettext
 from traktor import traktorwindow
+
+gettext.install(config.package)
 
 if __name__ == '__main__':
     traktor = traktorwindow.TraktorWindow()

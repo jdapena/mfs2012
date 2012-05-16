@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtrakt 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-16 18:16+0200\n"
+"POT-Creation-Date: 2012-05-16 19:48+0200\n"
 "PO-Revision-Date: 2012-05-16 18:17+0200\n"
 "Last-Translator: Jose Dapena Paz <jdapena@igalia.com>\n"
 "Language-Team: Spanish\n"
@@ -76,7 +76,7 @@ msgstr "No se puede escribir el fichero de configuración %s: %s\n"
 msgid " - GTrakt Feed D-BUS Service"
 msgstr " - Servicio D-BUS de feeds de GTrakt"
 
-#: ../backend/feed-service.c:207 ../backend/feed-test.c:222
+#: ../backend/feed-service.c:207 ../backend/feed-test.c:225
 #, c-format
 msgid "option parsing failed: %s\n"
 msgstr "Fallo parseando parámetros: %s\n"
@@ -111,11 +111,11 @@ msgstr "contenido del variant (%c) = %s"
 msgid "Response received!"
 msgstr "¡Recibida respuesta!"
 
-#: ../backend/feed-test.c:218
+#: ../backend/feed-test.c:221
 msgid " - GTrakt Feed test"
 msgstr " - Prueba de GTrakt Feed"
 
-#: ../backend/feed-test.c:228
+#: ../backend/feed-test.c:231
 #, c-format
 msgid "No query provided!\n"
 msgstr "¡No se ha proporcionado búsqueda!\n"
@@ -178,3 +178,31 @@ msgstr "Estado desconocido: %s"
 #, c-format
 msgid "Malformed URL: %s"
 msgstr "URL mal formada: %s"
+
+#: ../ui/gtk/traktor/traktorwindow.py:28
+msgid "Title"
+msgstr "Título"
+
+#: ../ui/gtk/traktor/traktorwindow.py:32
+msgid "Description"
+msgstr "Descripción"
+
+#: ../ui/gtk/traktor/traktorwindow.py:61
+msgid "_Traktor"
+msgstr "_Traktor"
+
+#: ../ui/gtk/traktor/traktorwindow.py:63
+msgid "_About"
+msgstr "_Sobre"
+
+#: ../ui/gtk/traktor/traktorwindow.py:63
+msgid "About this application"
+msgstr "Sobre esta aplicación"
+
+#: ../ui/gtk/traktor/traktorwindow.py:71
+msgid "Traktor"
+msgstr "Traktor"
+
+#: ../ui/gtk/traktor/traktorwindow.py:77
+msgid "Title:"
+msgstr "Título:"

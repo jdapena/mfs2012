@@ -2,3 +2,4 @@ backend/feed-service.c
 backend/feed-test.c
 backend/gt-feed-server.c
 backend/gt-feed.c
+ui/gtk/traktor/traktorwindow.py

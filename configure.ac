@@ -33,6 +33,7 @@ AC_CONFIG_FILES([
 	Makefile
 	backend/Makefile
 	po/Makefile.in
+	ui/gtk/traktor/config.py
 ])
 
 AC_OUTPUT

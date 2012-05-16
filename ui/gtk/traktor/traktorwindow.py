@@ -1,5 +1,7 @@
 from gi.repository import Gtk
 
+def N_(message) : return message
+
 MENU_UI = '''
 <ui>
     <menubar name="MenuBar">
@@ -25,11 +27,11 @@ class TraktorWindow(Gtk.Window):
         view = Gtk.TreeView(self.store)
 
         renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn('Title', renderer, text=1)
+        column = Gtk.TreeViewColumn(_('Title'), renderer, text=1)
         view.append_column(column)
 
         renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn('Description', renderer, text=2)
+        column = Gtk.TreeViewColumn(_('Description'), renderer, text=2)
         view.append_column(column)
 
         view.connect('row-activated', self._on_row_activated)
@@ -56,10 +58,11 @@ class TraktorWindow(Gtk.Window):
         accel_group = ui_manager.get_accel_group()
         self.add_accel_group(accel_group)
         action_group = Gtk.ActionGroup('Actions')
+        action_group.set_translation_domain(None)
         action_group.add_actions([
-                ('TraktorMenu', None, '_Traktor', None, None, None),
+                ('TraktorMenu', None, N_('_Traktor'), None, None, None),
                 ('About', Gtk.STOCK_ABOUT,
-                 '_About', None, 'About this application',
+                 N_('_About'), None, N_('About this application'),
                  self._on_about_action),
                 ])
         ui_manager.insert_action_group(action_group)
@@ -67,13 +70,13 @@ class TraktorWindow(Gtk.Window):
 
     def _on_about_action(self, action):
         about = Gtk.AboutDialog()
-        about.set_program_name("Traktor")
+        about.set_program_name(_("Traktor"))
         about.run()
         about.destroy()
 
     def _on_row_activated(self, tree_view, path, column):
         item = tree_view.get_model().get_iter(path)
-        print 'Title:', tree_view.get_model().get_value(item, 1)
+        print _('Title:'), tree_view.get_model().get_value(item, 1)
 
     def _quit(self, window, event):
         Gtk.main_quit()
