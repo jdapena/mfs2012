@@ -1,4 +1,6 @@
+#include <config.h>
 #include <glib.h>
+#include <glib/gi18n.h>
 
 #include "gt-feed-server.h"
 
@@ -14,7 +16,7 @@ static GOptionEntry entries[] = {
 		.short_name = 'k',
 		.arg = G_OPTION_ARG_STRING,
 		.arg_data = &apikey,
-		.description = "trakt.tv API key",
+		.description = N_("trakt.tv API key"),
 	},
         {
 		.long_name = NULL,
@@ -29,14 +31,14 @@ print_peer_credentials(GDBusConnection *connection)
 
 	credentials = g_dbus_connection_get_peer_credentials(connection);
 	if (credentials == NULL)
-		s = g_strdup("(no credentials received)");
+		s = g_strdup(_("(no credentials received)"));
 	else
 		s = g_credentials_to_string(credentials);
 
 
-	g_print("Client connected.\n"
-		"Peer credentials: %s\n"
-		"Negotiated capabilities: unix-fd-passing=%d\n",
+	g_print(_("Client connected.\n"
+		  "Peer credentials: %s\n"
+		  "Negotiated capabilities: unix-fd-passing=%d\n"),
 		s,
 		g_dbus_connection_get_capabilities(connection) &
 		G_DBUS_CAPABILITY_FLAGS_UNIX_FD_PASSING);
@@ -61,7 +63,7 @@ on_bus_acquired(GDBusConnection *connection,
 						  &error);
 
 	if (error || registration_id <= 0) {
-		g_critical("Couldn't register the feed server: %s\nQuitting...",
+		g_critical(_("Couldn't register the feed server: %s\nQuitting..."),
 			   error->message);
 		g_error_free(error);
 		g_main_loop_quit(loop);
@@ -80,7 +82,7 @@ on_name_lost(GDBusConnection *connection,
 	     const gchar *name,
 	     gpointer data)
 {
-	g_print("Could not acquire name. Quitting...\n");
+	g_print(_("Could not acquire name. Quitting...\n"));
 	g_main_loop_quit(loop);
 }
 
@@ -93,14 +95,14 @@ read_api_key(gchar *file)
 	GKeyFile *cfg = g_key_file_new();
 
 	if (!g_key_file_load_from_file(cfg, file, 0, &error)) {
-		g_print("Reading the API key from file %s failed: %s\n",
+		g_print(_("Reading the API key from file %s failed: %s\n"),
 			file, error->message);
 		goto bail;
 	}
 
 	key = g_key_file_get_value(cfg, "trakt", "api-key", &error);
 	if (!key || error) {
-		g_print("Can't find API key in config file %s: %s\n",
+		g_print(_("Can't find API key in config file %s: %s\n"),
 			file, error->message);
 		goto bail;
 	}
@@ -127,13 +129,13 @@ write_api_key(gchar *apikey, gchar *file)
 	g_key_file_set_value(cfg, "trakt", "api-key", apikey);
 	data = g_key_file_to_data(cfg, (gsize *) &len, &error);
 	if (!data || error) {
-		g_print("Can't generate config file %s: %s\n",
+		g_print(_("Can't generate config file %s: %s\n"),
 			file, error->message);
 		goto bail;
 	}
 
 	if (!g_file_set_contents(file, data, len, &error)) {
-		g_print("Can't write config file %s: %s\n",
+		g_print(_("Can't write config file %s: %s\n"),
 			file, error->message);
 		goto bail;
 	}
@@ -188,16 +190,21 @@ main (int argc, char **argv)
 
         g_type_init();
 
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
+
 	/* argument parsing */
 	{
 		gboolean ok = FALSE;
 		GError *error = NULL;
 		GOptionContext *context;
 
-		context = g_option_context_new(" - GTrakt Feed D-BUS Service");
+		context = g_option_context_new(_(" - GTrakt Feed D-BUS Service"));
+		g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
 		g_option_context_add_main_entries(context, entries, NULL);
 		if (!g_option_context_parse(context, &argc, &argv, &error)) {
-			g_print("option parsing failed: %s\n", error->message);
+			g_print(_("option parsing failed: %s\n"), error->message);
 			g_error_free(error);
 			goto bail;
 		}

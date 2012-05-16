@@ -1,4 +1,7 @@
+#include <config.h>
+
 #include <glib.h>
+#include <glib/gi18n.h>
 
 #include "gt-feed.h"
 
@@ -21,35 +24,35 @@ static GOptionEntry entries[] = {
 		.short_name = 'k',
 		.arg = G_OPTION_ARG_STRING,
 		.arg_data = &apikey,
-		.description = "trakt.tv API key",
+		.description = N_("trakt.tv API key"),
 	},
         {
 		.long_name = "movies",
 		.short_name = 'm',
 		.arg = G_OPTION_ARG_NONE,
 		.arg_data = &search_movies,
-		.description = "Limit search only to movies (default value)",
+		.description = N_("Limit search only to movies (default value)"),
 	},
         {
 		.long_name = "shows",
 		.short_name = 's',
 		.arg = G_OPTION_ARG_NONE,
 		.arg_data = &search_shows,
-		.description = "Limit search only to shows",
+		.description = N_("Limit search only to shows"),
 	},
 	{
 		.long_name = "episodes",
 		.short_name = 'e',
 		.arg = G_OPTION_ARG_NONE,
 		.arg_data = &search_episodes,
-		.description = "Limit search only to episodes",
+		.description = N_("Limit search only to episodes"),
 	},
 	{
 		.long_name = "query",
 		.short_name = 'q',
 		.arg = G_OPTION_ARG_STRING,
 		.arg_data = &query,
-		.description = "term to search",
+		.description = N_("term to search"),
 	},
         {
 		.long_name = NULL,
@@ -65,13 +68,13 @@ cb(GObject *source, GAsyncResult *res, void *data)
 
 	content = gt_feed_search_finish(feed, res, &err);
 	if (err) {
-		g_warning("Error: %s", err->message);
+		g_warning(_("Error: %s"), err->message);
 		g_error_free(err);
 		goto bail;
 	}
 
 	char *str = g_variant_print(content, TRUE);
-	g_print("variant content (%c) = %s",
+	g_print(_("variant content (%c) = %s"),
 		g_variant_classify(content), str);
 	g_free(str);
 
@@ -85,7 +88,7 @@ bail:
 static void
 response_received_callback (GtFeed *feed, gpointer user_data)
 {
-        g_message ("Response received!");
+        g_message (_("Response received!"));
 }
 
 static gboolean
@@ -110,14 +113,14 @@ read_api_key(gchar *file)
 	GKeyFile *cfg = g_key_file_new();
 
 	if (!g_key_file_load_from_file(cfg, file, 0, &error)) {
-		g_print("Reading the API key from file %s failed: %s\n",
+		g_print(_("Reading the API key from file %s failed: %s\n"),
 			file, error->message);
 		goto bail;
 	}
 
 	key = g_key_file_get_value(cfg, "trakt", "api-key", &error);
 	if (!key || error) {
-		g_print("Can't find API key in config file %s: %s\n",
+		g_print(_("Can't find API key in config file %s: %s\n"),
 			file, error->message);
 		goto bail;
 	}
@@ -144,13 +147,13 @@ write_api_key(gchar *apikey, gchar *file)
 	g_key_file_set_value(cfg, "trakt", "api-key", apikey);
 	data = g_key_file_to_data(cfg, (gsize *) &len, &error);
 	if (!data || error) {
-		g_print("Can't generate config file %s: %s\n",
+		g_print(_("Can't generate config file %s: %s\n"),
 			file, error->message);
 		goto bail;
 	}
 
 	if (!g_file_set_contents(file, data, len, &error)) {
-		g_print("Can't write config file %s: %s\n",
+		g_print(_("Can't write config file %s: %s\n"),
 			file, error->message);
 		goto bail;
 	}
@@ -202,22 +205,27 @@ main (int argc, char **argv)
 {
         g_type_init();
 
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
+
 	/* argument parsing */
 	{
 		gboolean ok = FALSE;
 		GError *error = NULL;
 		GOptionContext *context;
 
-		context = g_option_context_new(" - GTrakt Feed test");
+		context = g_option_context_new(_(" - GTrakt Feed test"));
+		g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
 		g_option_context_add_main_entries(context, entries, NULL);
 		if (!g_option_context_parse(context, &argc, &argv, &error)) {
-			g_print("option parsing failed: %s\n", error->message);
+			g_print(_("option parsing failed: %s\n"), error->message);
 			g_error_free(error);
 			goto bail;
 		}
 
 		if (!query) {
-			g_print("No query provided!\n");
+			g_print(_("No query provided!\n"));
 			goto bail;
 		}
 

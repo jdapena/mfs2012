@@ -25,6 +25,8 @@
 
 #include "gt-feed.h"
 
+#include <glib/gi18n.h>
+
 G_DEFINE_TYPE(GtFeedServer, gt_feed_server, G_TYPE_OBJECT)
 
 #define GET_PRIVATE(o) \
@@ -122,7 +124,7 @@ gt_feed_server_init(GtFeedServer *self)
 
 	priv->dbusinfo = g_dbus_node_info_new_for_xml(interface_xml, &error);
 	if (error) {
-		g_critical("Couldn't parse gdbus node info: %s",
+		g_critical(_("Couldn't parse gdbus node info: %s"),
 			   error->message);
 		g_error_free(error);
 	}
@@ -172,7 +174,7 @@ query(GtFeedServer *self,
 			(invocation,
 			 GT_FEED_SERVER_ERROR,
 			 GT_FEED_SERVICE_ERROR_MISSING_PARAMETER,
-			 "No query was specified.");
+			 _("No query was specified."));
 		return;
 	}
 
@@ -181,7 +183,7 @@ query(GtFeedServer *self,
 			(invocation,
 			 GT_FEED_SERVER_ERROR,
 			 GT_FEED_SERVICE_ERROR_MISSING_PARAMETER,
-			 "Search type is not valid.");
+			 _("Search type is not valid."));
 		return;
 	}
 
@@ -193,7 +195,7 @@ query(GtFeedServer *self,
 			(invocation,
 			 GT_FEED_SERVER_ERROR,
 			 GT_FEED_SERVICE_ERROR_INVALID_QUERY,
-			 "The specified query is invalid.");
+			 _("The specified query is invalid."));
 	}
 }
 
