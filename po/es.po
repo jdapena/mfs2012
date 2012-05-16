@@ -1,0 +1,180 @@
+# Spanish translations for gtrakt package
+# Traducciones al español para el paquete gtrakt.
+# Copyright (C) 2012 THE gtrakt'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gtrakt package.
+# Jose Dapena Paz <jdapena@igalia.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gtrakt 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-16 18:16+0200\n"
+"PO-Revision-Date: 2012-05-16 18:17+0200\n"
+"Last-Translator: Jose Dapena Paz <jdapena@igalia.com>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../backend/feed-service.c:19 ../backend/feed-test.c:27
+msgid "trakt.tv API key"
+msgstr "Clave de API de trakt.tv"
+
+#: ../backend/feed-service.c:34
+msgid "(no credentials received)"
+msgstr "(no se han recibido credenciales)"
+
+#: ../backend/feed-service.c:39
+#, c-format
+msgid ""
+"Client connected.\n"
+"Peer credentials: %s\n"
+"Negotiated capabilities: unix-fd-passing=%d\n"
+msgstr ""
+"Cliente conectado.\n"
+"Credenciales del par: %s\n"
+"Capacidades negociadas: unix-fd-passing=%d\n"
+
+#: ../backend/feed-service.c:66
+#, c-format
+msgid ""
+"Couldn't register the feed server: %s\n"
+"Quitting..."
+msgstr ""
+"No se puedo registrar el servidor de feed: %s\n"
+"Finalizando..."
+
+#: ../backend/feed-service.c:85
+#, c-format
+msgid "Could not acquire name. Quitting...\n"
+msgstr "No se pudo obtener nombre. Finalizando...\n"
+
+#: ../backend/feed-service.c:98 ../backend/feed-test.c:116
+#, c-format
+msgid "Reading the API key from file %s failed: %s\n"
+msgstr "Fallo leyendo la clave de API del fichero %s: %s\n"
+
+#: ../backend/feed-service.c:105 ../backend/feed-test.c:123
+#, c-format
+msgid "Can't find API key in config file %s: %s\n"
+msgstr ""
+"No se pudo encontrar la clave del API en el fichero de configuración %s: %s\n"
+
+#: ../backend/feed-service.c:132 ../backend/feed-test.c:150
+#, c-format
+msgid "Can't generate config file %s: %s\n"
+msgstr "No se pudo generar el fichero de configuración %s: %s\n"
+
+#: ../backend/feed-service.c:138 ../backend/feed-test.c:156
+#, c-format
+msgid "Can't write config file %s: %s\n"
+msgstr "No se puede escribir el fichero de configuración %s: %s\n"
+
+#: ../backend/feed-service.c:203
+msgid " - GTrakt Feed D-BUS Service"
+msgstr " - Servicio D-BUS de feeds de GTrakt"
+
+#: ../backend/feed-service.c:207 ../backend/feed-test.c:222
+#, c-format
+msgid "option parsing failed: %s\n"
+msgstr "Fallo parseando parámetros: %s\n"
+
+#: ../backend/feed-test.c:34
+msgid "Limit search only to movies (default value)"
+msgstr "Limitar búsqueda sólo a películas (por defecto)"
+
+#: ../backend/feed-test.c:41
+msgid "Limit search only to shows"
+msgstr "Limitar búsqueda solo a programas"
+
+#: ../backend/feed-test.c:48
+msgid "Limit search only to episodes"
+msgstr "Limitar búsqueda sólo a episodios"
+
+#: ../backend/feed-test.c:55
+msgid "term to search"
+msgstr "término a buscar"
+
+#: ../backend/feed-test.c:71
+#, c-format
+msgid "Error: %s"
+msgstr "Error: %s"
+
+#: ../backend/feed-test.c:77
+#, c-format
+msgid "variant content (%c) = %s"
+msgstr "contenido del variant (%c) = %s"
+
+#: ../backend/feed-test.c:91
+msgid "Response received!"
+msgstr "¡Recibida respuesta!"
+
+#: ../backend/feed-test.c:218
+msgid " - GTrakt Feed test"
+msgstr " - Prueba de GTrakt Feed"
+
+#: ../backend/feed-test.c:228
+#, c-format
+msgid "No query provided!\n"
+msgstr "¡No se ha proporcionado búsqueda!\n"
+
+#: ../backend/gt-feed-server.c:127
+#, c-format
+msgid "Couldn't parse gdbus node info: %s"
+msgstr "No se pudo parsear la información de nodo gdbus: %s"
+
+#: ../backend/gt-feed-server.c:177
+msgid "No query was specified."
+msgstr "No se ha proporcionado búsqueda."
+
+#: ../backend/gt-feed-server.c:186
+msgid "Search type is not valid."
+msgstr "El tipo de búsqueda no es válido."
+
+#: ../backend/gt-feed-server.c:198
+msgid "The specified query is invalid."
+msgstr "El término de búsqueda es inválido."
+
+#: ../backend/gt-feed.c:159
+msgid "Cannot connect to the server"
+msgstr "No se pudo conectar al servidor"
+
+#: ../backend/gt-feed.c:165
+msgid "Cannot connect to the proxy server"
+msgstr "No se pudo conectar al servidor proxy"
+
+#: ../backend/gt-feed.c:172
+#, c-format
+msgid "Invalid request URI or header: %s"
+msgstr "URI de petición o cabecera inválida: %s"
+
+#: ../backend/gt-feed.c:179
+#, c-format
+msgid "Authentication required: %s"
+msgstr "Autenticación necesaria: %s"
+
+#: ../backend/gt-feed.c:185
+#, c-format
+msgid "The requested resource was not found: %s"
+msgstr "El recurso solicitado no se ha encontrado: %s"
+
+#: ../backend/gt-feed.c:192
+#, c-format
+msgid "The entry has been modified since it was downloaded: %s"
+msgstr "La entrada ha sido modificada desde que se descargó: %s"
+
+#: ../backend/gt-feed.c:198
+msgid "Operation was cancelled"
+msgstr "Operación cancelada"
+
+#: ../backend/gt-feed.c:201
+#, c-format
+msgid "Unhandled status: %s"
+msgstr "Estado desconocido: %s"
+
+#: ../backend/gt-feed.c:265
+#, c-format
+msgid "Malformed URL: %s"
+msgstr "URL mal formada: %s"
